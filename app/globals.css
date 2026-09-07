@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(198, 255, 94, 0.4) transparent;
+}
+
+html {
+  background: #07080a;
+}
+
+html.preloading,
+html.preloading body {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  background-color: #07080a;
+  color: #f3f4ef;
+  font-feature-settings: "ss01" 1, "cv01" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #c6ff5e;
+  color: #07080a;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(198, 255, 94, 0.35);
+  border-radius: 999px;
+  border: 2px solid #07080a;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a[data-cursor="link"],
+  button[data-cursor="link"],
+  [data-cursor="view"] {
+    cursor: none;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+@layer utilities {
+  .transform-gpu-safe {
+    transform: translateZ(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

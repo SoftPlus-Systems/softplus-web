@@ -1,0 +1,21 @@
+import { stats } from "@/lib/data";
+import AnimatedCounter from "@/components/AnimatedCounter";
+
+export default function Stats() {
+  return (
+    <section className="relative border-y border-surface-line bg-ink-950 py-24 lg:py-32">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className={`relative ${i > 0 ? "lg:pl-8 lg:border-l lg:border-surface-line" : ""}`}>
+              <div className="font-display text-5xl font-medium tracking-tightest text-bone sm:text-6xl lg:text-7xl">
+                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="mt-3 font-mono text-xs uppercase tracking-wide-2 text-mist">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
