@@ -49,6 +49,28 @@ function Orbit({
   );
 }
 
+function TechMarquee({ items, duration, reverse = false }: { items: string[]; duration: number; reverse?: boolean }) {
+  const list = [...items, ...items];
+  return (
+    <div className="relative overflow-hidden mask-fade-x">
+      <div
+        className="flex w-max items-center gap-3 pr-3"
+        style={{ animation: `marquee ${duration}s linear infinite`, animationDirection: reverse ? "reverse" : "normal" }}
+      >
+        {list.map((item, i) => (
+          <div
+            key={`${item}-${i}`}
+            className="flex shrink-0 items-center gap-2 rounded-full border border-surface-line bg-surface px-4 py-2.5"
+          >
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
+            <span className="whitespace-nowrap font-mono text-xs text-bone">{item}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Technology() {
   return (
     <section id="stack" className="relative overflow-hidden bg-ink-950 py-32 lg:py-44">
@@ -73,16 +95,9 @@ export default function Technology() {
         <Orbit items={ring2} radius={210} duration={40} reverse />
       </div>
 
-      <div className="mx-auto mt-16 grid max-w-4xl grid-cols-2 gap-3 px-6 sm:grid-cols-3 md:hidden">
-        {stack.map((item) => (
-          <div
-            key={item}
-            className="flex items-center gap-2 rounded-full border border-surface-line bg-surface px-4 py-2.5"
-          >
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-signal" />
-            <span className="truncate font-mono text-xs text-bone">{item}</span>
-          </div>
-        ))}
+      <div className="mt-16 flex flex-col gap-4 md:hidden">
+        <TechMarquee items={ring1} duration={18} />
+        <TechMarquee items={ring2} duration={22} reverse />
       </div>
     </section>
   );

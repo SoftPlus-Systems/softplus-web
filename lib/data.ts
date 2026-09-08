@@ -80,6 +80,16 @@ export const services: Service[] = [
   },
 ];
 
+export type MockupType =
+  | "erp"
+  | "accounting"
+  | "stock"
+  | "pos"
+  | "mobile-medical"
+  | "mobile-invoice"
+  | "website-menu"
+  | "website-feedback";
+
 export type CaseStudy = {
   index: string;
   name: string;
@@ -87,60 +97,121 @@ export type CaseStudy = {
   description: string;
   results: { label: string; value: string }[];
   tags: string[];
+  type: MockupType;
 };
 
 export const caseStudies: CaseStudy[] = [
   {
     index: "01",
-    name: "Project Meridian",
-    category: "ERP · Retail Group",
+    name: "StackBooks",
+    category: "ERP · Multi-Branch Retail",
     description:
-      "A unified ERP core replacing six disconnected legacy tools across a 40-branch retail operation — inventory, finance, and staffing in one place.",
+      "A unified ERP core replacing six disconnected legacy tools across a 35-branch retail operation — inventory, finance, and staffing in one place.",
     results: [
-      { label: "Reporting time", value: "-82%" },
-      { label: "Branches live", value: "40" },
-      { label: "Manual entry", value: "-91%" },
+      { label: "Reporting time", value: "-70%" },
+      { label: "Branches live", value: "35" },
+      { label: "Manual entry", value: "-88%" },
     ],
     tags: ["ERP", "Multi-branch", "Reporting"],
+    type: "erp",
   },
   {
     index: "02",
-    name: "Ledger Atlas",
+    name: "EasyAccounting",
     category: "Accounting · Financial Services",
     description:
-      "Rebuilt a compliance-critical accounting platform from the ground up — audit trails, multi-entity ledgers, and automated tax handling.",
+      "A compliance-critical accounting platform built from the ground up — audit trails, multi-entity ledgers, and automated tax handling.",
     results: [
-      { label: "Close cycle", value: "-65%" },
-      { label: "Entities managed", value: "120+" },
+      { label: "Close cycle", value: "-60%" },
+      { label: "Clients onboarded", value: "150+" },
       { label: "Audit findings", value: "0" },
     ],
     tags: ["Accounting", "Compliance", "Multi-entity"],
+    type: "accounting",
   },
   {
     index: "03",
-    name: "Counter One",
-    category: "POS + Stock · Hospitality Chain",
+    name: "DressDesk",
+    category: "Stock & Inventory · Fashion Retail",
     description:
-      "An offline-first POS synced in real time with a central stock engine across 120 locations, keeping checkout fast even when the network isn't.",
+      "Real-time stock intelligence for a fashion retail chain — size and colour-level tracking, automated reordering, synced across every store.",
     results: [
-      { label: "Checkout speed", value: "1.2s" },
-      { label: "Uptime", value: "99.98%" },
-      { label: "Stock accuracy", value: "+37%" },
+      { label: "Stock accuracy", value: "+41%" },
+      { label: "Stores synced", value: "18" },
+      { label: "Stockouts", value: "-55%" },
     ],
-    tags: ["POS", "Stock", "Offline-first"],
+    tags: ["Stock", "Retail", "Inventory"],
+    type: "stock",
   },
   {
     index: "04",
-    name: "Fieldwork",
-    category: "Mobile · Logistics",
+    name: "EasyPOS",
+    category: "Point of Sale · Retail Chains",
     description:
-      "A native field-operations app for a logistics fleet — route management, proof of delivery, and live sync built for patchy connectivity.",
+      "An offline-first POS built for high-volume checkout — instant inventory sync, loyalty built in, and receipts printing in a little over a second.",
     results: [
-      { label: "Delivery accuracy", value: "+44%" },
-      { label: "Active devices", value: "3,200" },
-      { label: "Crash-free rate", value: "99.9%" },
+      { label: "Checkout speed", value: "1.1s" },
+      { label: "Uptime", value: "99.99%" },
+      { label: "Terminals deployed", value: "220+" },
     ],
-    tags: ["Mobile", "Logistics", "Offline sync"],
+    tags: ["POS", "Retail", "Offline-first"],
+    type: "pos",
+  },
+  {
+    index: "05",
+    name: "SP Medical",
+    category: "Mobile App · Healthcare",
+    description:
+      "A patient-facing mobile app for a healthcare network — appointment booking, records access, and reminders that actually cut no-shows.",
+    results: [
+      { label: "Patients booked", value: "12k+" },
+      { label: "App rating", value: "4.8★" },
+      { label: "No-shows", value: "-45%" },
+    ],
+    tags: ["Mobile", "Healthcare", "Booking"],
+    type: "mobile-medical",
+  },
+  {
+    index: "06",
+    name: "EasyInvoicing",
+    category: "Mobile App · Field Sales",
+    description:
+      "An invoicing app for field and sales teams — generate, send, and track invoices from a phone, synced straight to the books back at the office.",
+    results: [
+      { label: "Faster invoicing", value: "3x" },
+      { label: "Invoices sent", value: "40k+" },
+      { label: "On-time payment", value: "99.5%" },
+    ],
+    tags: ["Mobile", "Invoicing", "Field sales"],
+    type: "mobile-invoice",
+  },
+  {
+    index: "07",
+    name: "SP Menus",
+    category: "Website · Restaurants & Cafés",
+    description:
+      "Digital menu and ordering sites for restaurants and cafés — built to load instantly on a phone at the table and convert browsers into orders.",
+    results: [
+      { label: "Online orders", value: "+38%" },
+      { label: "Menus live", value: "300+" },
+      { label: "Avg. load time", value: "2.4s" },
+    ],
+    tags: ["Website", "Ordering", "Restaurants"],
+    type: "website-menu",
+  },
+  {
+    index: "08",
+    name: "Feedback Apps",
+    category: "Website · Customer Experience",
+    description:
+      "A lightweight feedback and survey platform embedded across client websites — built to turn casual visitors into measurable customer insight.",
+    results: [
+      { label: "Responses collected", value: "50k+" },
+      { label: "Avg. rating", value: "4.6★" },
+      { label: "Response rate", value: "+27%" },
+    ],
+    tags: ["Website", "Feedback", "Surveys"],
+    type: "website-feedback",
   },
 ];
 

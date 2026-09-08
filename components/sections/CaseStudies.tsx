@@ -41,7 +41,7 @@ export default function CaseStudies() {
                 data-cursor="view"
                 className="group aspect-[4/3] w-full origin-center transition-transform duration-700 ease-cinematic hover:scale-[1.02]"
               >
-                <ProjectMockup index={i} />
+                <ProjectMockup index={i} type={project.type} />
               </div>
 
               <div>
