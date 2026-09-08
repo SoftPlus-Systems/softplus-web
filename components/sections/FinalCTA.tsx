@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import MagneticButton from "@/components/MagneticButton";
 import ParticleField from "./ParticleField";
+import { contact, footerNav } from "@/lib/data";
 
 export default function FinalCTA() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -64,11 +65,11 @@ export default function FinalCTA() {
         </p>
 
         <div data-cta-reveal className="mt-11 flex flex-wrap items-center justify-center gap-5">
-          <MagneticButton href="mailto:hello@softplussystems.com" className="!px-10 !py-5 !text-sm">
-            hello@softplussystems.com
+          <MagneticButton href={`mailto:${contact.email}`} className="!px-10 !py-5 !text-sm">
+            {contact.email}
           </MagneticButton>
-          <MagneticButton href="tel:+10000000000" variant="ghost" className="!px-10 !py-5 !text-sm">
-            +1 (000) 000-0000
+          <MagneticButton href={footerNav.social[0].href} variant="ghost" className="!px-10 !py-5 !text-sm">
+            @softplussystems
           </MagneticButton>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Wordmark } from "./PlusLogo";
-import { nav } from "@/lib/data";
+import { contact, nav } from "@/lib/data";
 import MagneticButton from "./MagneticButton";
 
 export default function Navbar() {
@@ -105,7 +105,7 @@ export default function Navbar() {
             </nav>
             <div className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wide-2 text-mist sm:flex-row sm:items-center sm:justify-between">
               <span>Soft+Systems</span>
-              <span>hello@softplussystems.com</span>
+              <span>{contact.email}</span>
             </div>
           </motion.div>
         )}

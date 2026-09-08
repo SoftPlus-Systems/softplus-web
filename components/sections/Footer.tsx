@@ -1,5 +1,5 @@
 import { Wordmark } from "@/components/PlusLogo";
-import { footerNav } from "@/lib/data";
+import { contact, footerNav } from "@/lib/data";
 
 export default function Footer() {
   return (
@@ -57,6 +57,8 @@ export default function Footer() {
                 <li key={item.label}>
                   <a
                     href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     data-cursor="link"
                     className="text-sm text-mist transition-colors duration-300 hover:text-bone"
                   >
@@ -65,7 +67,7 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-mist">hello@softplussystems.com</p>
+            <p className="mt-6 text-sm text-mist">{contact.email}</p>
           </div>
         </div>
 

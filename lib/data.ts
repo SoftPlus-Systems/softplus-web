@@ -261,36 +261,38 @@ export const stats = [
   { value: 98, suffix: "%", label: "Client retention" },
 ];
 
+// NOTE: quotes below are drafted by Claude for Soft Plus Systems to review
+// and edit/approve — not verified client statements yet.
 export const testimonials = [
   {
     quote:
-      "Soft Plus Systems replaced four disconnected tools with one platform our whole team actually understands. The transition was the smoothest system change we've been through.",
-    name: "Placeholder Name",
-    role: "Chief Operating Officer, Retail Group",
+      "EasyAccounting cut our month-end close from days to hours. Everything reconciles the way it should, and I'm not chasing spreadsheets anymore.",
+    name: "Somoplast",
+    role: "Accounting Manager",
   },
   {
     quote:
-      "Our checkout speed and stock accuracy both improved the same month we launched. It's rare that a system change pays for itself that fast.",
-    name: "Placeholder Name",
-    role: "Head of Operations, Hospitality Chain",
+      "We used to guess at stock levels. Now the floor staff know exactly what's on the shelf before a customer asks, and restocking runs itself.",
+    name: "Seasweet",
+    role: "Store Supervisor",
   },
   {
     quote:
-      "They didn't just build what we asked for — they questioned our process, and the software that came out the other side was better for it.",
-    name: "Placeholder Name",
-    role: "Finance Director, Financial Services",
+      "As an accounting firm, we can't afford software that gets audit trails wrong. Soft Plus Systems built us something our own clients trust.",
+    name: "Srour Accounting Firm",
+    role: "CEO",
   },
   {
     quote:
-      "The mobile app for our field team has been running for two years without a single day of meaningful downtime. That reliability is the whole product.",
-    name: "Placeholder Name",
-    role: "VP Logistics, Distribution Network",
+      "Our showroom runs on tight margins and tighter timing. Since launch, checkout is faster and inventory finally matches what's actually on the floor.",
+    name: "Hobeika Frs",
+    role: "Showroom Manager",
   },
 ];
 
 export const trustedBy = [
-  "MERIDIAN GROUP", "ATLAS FINANCIAL", "COUNTER ONE", "FIELDWORK LOGISTICS",
-  "NORTHBAY RETAIL", "LEDGER & CO", "PORTLINE HOLDINGS", "VANTAGE TRADE",
+  "SOMOPLAST", "SEASWEET", "SROUR ACCOUNTING FIRM", "HOBEIKA FRS",
+  "MAZAJ", "STARGATE", "HOLLYWOOD", "MR GRILL", "LA PLACE", "ABOU ZEID",
 ];
 
 export const footerNav = {
@@ -301,10 +303,9 @@ export const footerNav = {
     { label: "Process", href: "#process" },
     { label: "Contact", href: "#contact" },
   ],
-  social: [
-    { label: "LinkedIn", href: "#" },
-    { label: "X / Twitter", href: "#" },
-    { label: "GitHub", href: "#" },
-    { label: "Dribbble", href: "#" },
-  ],
+  social: [{ label: "Instagram", href: "https://www.instagram.com/softplussystems" }],
+};
+
+export const contact = {
+  email: "softplussystems.service@gmail.com",
 };
