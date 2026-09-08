@@ -13,6 +13,7 @@
 
 html {
   background: #07080a;
+  overflow-x: hidden;
 }
 
 html.preloading,
@@ -26,6 +27,7 @@ body {
   color: #f3f4ef;
   font-feature-settings: "ss01" 1, "cv01" 1;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 ::selection {

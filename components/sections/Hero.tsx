@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import MagneticButton from "@/components/MagneticButton";
 import GridBackdrop from "@/components/GridBackdrop";
@@ -10,6 +10,18 @@ const HeroScene = dynamic(() => import("./HeroScene"), { ssr: false });
 
 export default function Hero() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const [showScene, setShowScene] = useState(false);
+
+  useEffect(() => {
+    // Only mount the WebGL scene on desktop — on mobile even a CSS-hidden
+    // canvas keeps its render loop running and competes with scroll animations.
+    const mq = window.matchMedia("(min-width: 1024px)");
+    setShowScene(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setShowScene(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -39,12 +51,6 @@ export default function Hero() {
           "-=0.6"
         )
         .fromTo(
-          "[data-hero-scene]",
-          { opacity: 0, scale: 0.92 },
-          { opacity: 1, scale: 1, duration: 1.4 },
-          "-=1.2"
-        )
-        .fromTo(
           "[data-hero-scroll]",
           { opacity: 0 },
           { opacity: 1, duration: 0.6 },
@@ -54,6 +60,21 @@ export default function Hero() {
 
     return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    // Runs independently of the main intro timeline since the scene only
+    // mounts once the desktop media query resolves (see effect above) —
+    // querying it as part of the shared timeline can race that mount.
+    if (!showScene || !sceneRef.current) return;
+    const tween = gsap.fromTo(
+      sceneRef.current,
+      { opacity: 0, scale: 0.92 },
+      { opacity: 1, scale: 1, duration: 1.4, delay: 2.4, ease: "power4.out" }
+    );
+    return () => {
+      tween.kill();
+    };
+  }, [showScene]);
 
   return (
     <section
@@ -69,12 +90,14 @@ export default function Hero() {
         }}
       />
 
-      <div
-        data-hero-scene
-        className="absolute bottom-0 right-0 top-28 -z-0 hidden w-[44%] opacity-70 [mask-image:linear-gradient(to_right,transparent,black_65%,black_100%)] lg:block"
-      >
-        <HeroScene />
-      </div>
+      {showScene && (
+        <div
+          ref={sceneRef}
+          className="absolute bottom-0 right-0 top-28 -z-0 hidden w-[44%] opacity-70 [mask-image:linear-gradient(to_right,transparent,black_65%,black_100%)] lg:block"
+        >
+          <HeroScene />
+        </div>
+      )}
 
       <div className="relative z-10 mx-auto w-full max-w-[1400px] px-6 lg:px-10">
         <div className="max-w-3xl">

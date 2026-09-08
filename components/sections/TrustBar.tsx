@@ -12,7 +12,7 @@ export default function TrustBar() {
         </p>
       </div>
 
-      <div className="relative mask-fade-x">
+      <div className="relative mask-fade-x overflow-hidden">
         <div className="flex w-max animate-marquee items-center gap-16 pr-16">
           {list.map((name, i) => (
             <div key={i} className="flex items-center gap-3 whitespace-nowrap opacity-50 transition-opacity hover:opacity-100">
