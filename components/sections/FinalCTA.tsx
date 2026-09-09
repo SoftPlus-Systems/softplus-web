@@ -20,7 +20,7 @@ export default function FinalCTA() {
           duration: 1,
           stagger: 0.12,
           ease: "power3.out",
-          scrollTrigger: { trigger: rootRef.current, start: "top 70%" },
+          scrollTrigger: { trigger: rootRef.current, start: "top 70%", toggleActions: "play none none reverse" },
         }
       );
     }, rootRef);
