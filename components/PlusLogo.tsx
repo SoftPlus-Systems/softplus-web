@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function PlusLogo({ className = "h-6 w-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" fill="none" className={className} aria-hidden="true">
@@ -8,13 +10,10 @@ export default function PlusLogo({ className = "h-6 w-6" }: { className?: string
   );
 }
 
-export function Wordmark({ className = "" }: { className?: string }) {
+export function Wordmark({ className = "h-9" }: { className?: string }) {
   return (
-    <span className={`inline-flex items-center gap-2.5 font-display font-semibold ${className}`}>
-      <PlusLogo className="h-7 w-7 text-signal" />
-      <span className="tracking-tight">
-        Soft<span className="text-signal">+</span>Systems
-      </span>
+    <span className={`inline-flex items-center rounded-xl bg-white p-1.5 shadow-sm ${className}`}>
+      <Image src="/logo.png" alt="Soft Plus Systems" width={256} height={256} className="h-full w-auto" priority />
     </span>
   );
 }

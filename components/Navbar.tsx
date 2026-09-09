@@ -36,7 +36,7 @@ export default function Navbar() {
           }`}
         >
           <a href="#top" data-cursor="link" className="text-bone">
-            <Wordmark className="text-base lg:text-lg" />
+            <Wordmark className="h-8 lg:h-9" />
           </a>
 
           <nav className="hidden items-center gap-9 lg:flex">

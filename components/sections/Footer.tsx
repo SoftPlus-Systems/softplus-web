@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <a href="#top" className="text-bone">
-              <Wordmark className="text-xl" />
+              <Wordmark className="h-11" />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-mist">
               Custom software for businesses that run on precision — ERP, accounting, stock,
