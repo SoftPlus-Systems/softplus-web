@@ -105,7 +105,9 @@ export default function Navbar() {
             </nav>
             <div className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wide-2 text-mist sm:flex-row sm:items-center sm:justify-between">
               <span>Soft+Systems</span>
-              <span>{contact.email}</span>
+              <a href={`mailto:${contact.email}`} className="transition-colors duration-300 hover:text-bone">
+                Email us
+              </a>
             </div>
           </motion.div>
         )}

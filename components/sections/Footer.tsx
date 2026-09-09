@@ -67,7 +67,13 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-mist">{contact.email}</p>
+            <a
+              href={`mailto:${contact.email}`}
+              data-cursor="link"
+              className="mt-6 inline-block text-sm text-mist transition-colors duration-300 hover:text-bone"
+            >
+              Email us
+            </a>
           </div>
         </div>
 

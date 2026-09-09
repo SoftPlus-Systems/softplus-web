@@ -66,7 +66,7 @@ export default function FinalCTA() {
 
         <div data-cta-reveal className="mt-11 flex flex-wrap items-center justify-center gap-5">
           <MagneticButton href={`mailto:${contact.email}`} className="!px-10 !py-5 !text-sm">
-            {contact.email}
+            Email us
           </MagneticButton>
           <MagneticButton href={footerNav.social[0].href} variant="ghost" className="!px-10 !py-5 !text-sm">
             @softplussystems
