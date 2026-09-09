@@ -90,8 +90,8 @@ export default function Footer() {
         aria-hidden="true"
         className="select-none overflow-hidden whitespace-nowrap pb-4 text-center font-display font-semibold leading-none text-transparent"
         style={{
-          WebkitTextStroke: "1px rgba(243,244,239,0.08)",
-          fontSize: "clamp(4rem, 14vw, 11rem)",
+          WebkitTextStroke: "1px rgba(243,244,239,0.06)",
+          fontSize: "clamp(3rem, 10vw, 7.5rem)",
         }}
       >
         Soft+Systems

@@ -28,13 +28,13 @@ export default function FinalCTA() {
   }, []);
 
   return (
-    <section id="contact" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-40 lg:py-56">
+    <section id="contact" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-28 lg:py-40">
       <ParticleField />
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 50% 100%, rgba(198,255,94,0.18), transparent 60%)",
+            "radial-gradient(circle at 50% 100%, rgba(198,255,94,0.12), transparent 60%)",
         }}
       />
       <div
@@ -52,19 +52,19 @@ export default function FinalCTA() {
 
         <h2
           data-cta-reveal
-          className="font-display text-5xl font-medium leading-[1] tracking-tightest text-bone sm:text-6xl lg:text-7xl"
+          className="font-display text-4xl font-medium leading-[1.02] tracking-tightest text-bone sm:text-5xl lg:text-6xl"
         >
           Have a system worth
           <br />
           <span className="text-signal">building right?</span>
         </h2>
 
-        <p data-cta-reveal className="mx-auto mt-7 max-w-lg text-lg leading-relaxed text-mist">
+        <p data-cta-reveal className="mx-auto mt-6 max-w-lg leading-relaxed text-mist lg:text-lg">
           Tell us what you&rsquo;re running on today. We&rsquo;ll tell you what it should look like
           in six months.
         </p>
 
-        <div data-cta-reveal className="mt-11 flex flex-wrap items-center justify-center gap-5">
+        <div data-cta-reveal className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <MagneticButton href={`mailto:${contact.email}`} className="!px-10 !py-5 !text-sm">
             Email us
           </MagneticButton>

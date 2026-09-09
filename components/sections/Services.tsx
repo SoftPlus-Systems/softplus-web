@@ -16,18 +16,18 @@ function ServiceGlyph({ seed, color }: { seed: number; color: string }) {
   }, [seed]);
 
   return (
-    <div className="grid grid-cols-6 gap-2">
+    <div className="grid w-[150px] grid-cols-6 gap-[5px]">
       {cells.map((on, i) => (
         <motion.span
           key={i}
           initial={{ opacity: 0.08, scale: 0.7 }}
           animate={{
-            opacity: on ? 1 : 0.08,
+            opacity: on ? 0.85 : 0.08,
             scale: on ? 1 : 0.7,
           }}
           transition={{ duration: 0.5, delay: (i % 6) * 0.025 }}
-          className="aspect-square rounded-[3px]"
-          style={{ background: on ? color : "rgba(243,244,239,0.4)" }}
+          className="aspect-square rounded-[2px]"
+          style={{ background: on ? color : "rgba(243,244,239,0.35)" }}
         />
       ))}
     </div>
@@ -38,8 +38,8 @@ function ServiceCard({ service }: { service: (typeof services)[number] }) {
   return (
     <div className="relative overflow-hidden rounded-3xl border border-surface-line bg-surface p-8">
       <div
-        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full blur-[90px]"
-        style={{ background: service.color, opacity: 0.25 }}
+        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full"
+        style={{ background: `radial-gradient(circle, ${service.color}2b, transparent 70%)` }}
       />
       <div className="relative">
         <span className="font-mono text-sm" style={{ color: service.color }}>
@@ -170,8 +170,8 @@ function DesktopExplorer() {
       <div className="lg:sticky lg:top-32 lg:h-fit">
         <div className="relative overflow-hidden rounded-3xl border border-surface-line bg-surface p-8 lg:p-10">
           <div
-            className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full blur-[90px] transition-colors duration-500"
-            style={{ background: svc.color, opacity: 0.25 }}
+            className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full transition-[background] duration-500"
+            style={{ background: `radial-gradient(circle, ${svc.color}2b, transparent 70%)` }}
           />
           <AnimatePresence mode="wait">
             <motion.div
@@ -205,7 +205,7 @@ function DesktopExplorer() {
 
 export default function Services() {
   return (
-    <section id="services" className="relative bg-ink-950 py-32 lg:py-44">
+    <section id="services" className="relative bg-ink-950 py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="Solutions"
@@ -220,7 +220,7 @@ export default function Services() {
         />
       </div>
 
-      <div className="mt-20">
+      <div className="mt-16">
         <MobileCarousel />
         <div className="mx-auto hidden max-w-[1400px] px-6 lg:block lg:px-10">
           <DesktopExplorer />

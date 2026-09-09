@@ -1,7 +1,7 @@
 export default function NoiseOverlay() {
   return (
     <svg
-      className="pointer-events-none fixed inset-0 z-[90] h-full w-full opacity-[0.035] mix-blend-overlay"
+      className="pointer-events-none fixed inset-0 z-[90] h-full w-full opacity-[0.022] mix-blend-overlay"
       aria-hidden="true"
     >
       <filter id="noiseFilter">

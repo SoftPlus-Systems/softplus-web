@@ -53,7 +53,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-32 lg:py-44">
+    <section id="about" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-24 lg:py-32">
       <GridBackdrop className="opacity-60" />
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-wide-3 text-signal">
@@ -72,7 +72,7 @@ export default function About() {
           ))}
         </p>
 
-        <div className="mt-24 grid gap-px overflow-hidden rounded-2xl border border-surface-line bg-surface-line sm:grid-cols-3">
+        <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-surface-line bg-surface-line sm:grid-cols-3">
           {beliefs.map((b) => (
             <div data-belief key={b.n} className="bg-ink-950 p-8 lg:p-10">
               <span className="font-mono text-sm text-signal">{b.n}</span>

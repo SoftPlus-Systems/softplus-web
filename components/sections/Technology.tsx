@@ -73,7 +73,7 @@ function TechMarquee({ items, duration, reverse = false }: { items: string[]; du
 
 export default function Technology() {
   return (
-    <section id="stack" className="relative overflow-hidden bg-ink-950 py-32 lg:py-44">
+    <section id="stack" className="relative overflow-hidden bg-ink-950 py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="Technology"
@@ -83,7 +83,7 @@ export default function Technology() {
         />
       </div>
 
-      <div className="relative mx-auto mt-20 hidden h-[560px] max-w-3xl items-center justify-center md:flex">
+      <div className="relative mx-auto mt-16 hidden h-[520px] max-w-3xl items-center justify-center md:flex">
         <div className="absolute h-[420px] w-[420px] rounded-full border border-surface-line" />
         <div className="absolute h-[260px] w-[260px] rounded-full border border-surface-line" />
 

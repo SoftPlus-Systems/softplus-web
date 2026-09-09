@@ -52,12 +52,12 @@ function TestimonialCard({ quote, name, role }: (typeof testimonials)[number]) {
 
 export default function Testimonials() {
   return (
-    <section className="relative bg-ink-950 py-32 lg:py-44">
+    <section className="relative bg-ink-950 py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading eyebrow="Client voices" title="Trusted with the systems that matter." />
       </div>
 
-      <div className="mt-16 flex gap-6 overflow-x-auto px-6 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory lg:px-10 [&::-webkit-scrollbar]:hidden">
+      <div className="mt-14 flex gap-6 overflow-x-auto px-6 pb-8 [-ms-overflow-style:none] [scrollbar-width:none] snap-x snap-mandatory lg:px-10 [&::-webkit-scrollbar]:hidden">
         {testimonials.map((t) => (
           <TestimonialCard key={t.name + t.role} {...t} />
         ))}

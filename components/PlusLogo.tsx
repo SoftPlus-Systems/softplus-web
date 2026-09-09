@@ -13,7 +13,7 @@ export default function PlusLogo({ className = "h-6 w-6" }: { className?: string
 export function Wordmark({ className = "h-9" }: { className?: string }) {
   return (
     <span className={`inline-flex items-center rounded-xl bg-white p-1.5 shadow-sm ${className}`}>
-      <Image src="/logo.png" alt="Soft Plus Systems" width={256} height={256} className="h-full w-auto" priority />
+      <Image src="/logo.webp" alt="Soft Plus Systems" width={256} height={256} className="h-full w-auto" priority />
     </span>
   );
 }

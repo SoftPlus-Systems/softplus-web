@@ -43,6 +43,17 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable} preloading`}>
+      <head>
+        {/* The scroll lock and the intro overlay are both removed by the
+            preloader. With scripting off nothing would ever remove them, so
+            the page would render as an unscrollable black panel. */}
+        <noscript>
+          <style>{`
+            html.preloading, html.preloading body { overflow: auto !important; height: auto !important; }
+            [data-preloader] { display: none !important; }
+          `}</style>
+        </noscript>
+      </head>
       <body className="font-sans">
         <Preloader />
         <Cursor />

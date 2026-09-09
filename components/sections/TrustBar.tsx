@@ -8,7 +8,7 @@ export default function TrustBar() {
     <section className="relative border-y border-surface-line bg-ink-950 py-10">
       <div className="mx-auto mb-8 max-w-[1400px] px-6 lg:px-10">
         <p className="font-mono text-xs uppercase tracking-wide-2 text-mist">
-          Trusted by ambitious companies building the future
+          Running daily in retail, hospitality, healthcare and accounting
         </p>
       </div>
 

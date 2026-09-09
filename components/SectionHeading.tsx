@@ -18,14 +18,14 @@ export default function SectionHeading({ eyebrow, title, description, align = "l
         {eyebrow}
       </div>
       <h2
-        className={`font-display text-4xl font-medium leading-[1.05] tracking-tightest sm:text-5xl lg:text-6xl ${
+        className={`font-display text-3xl font-medium leading-[1.08] tracking-tightest sm:text-4xl lg:text-5xl ${
           light ? "text-ink-950" : "text-bone"
         }`}
       >
         {title}
       </h2>
       {description && (
-        <p className={`mt-6 text-lg leading-relaxed ${light ? "text-ink-900/70" : "text-mist"}`}>{description}</p>
+        <p className={`mt-5 leading-relaxed lg:text-lg ${light ? "text-ink-900/70" : "text-mist"}`}>{description}</p>
       )}
     </div>
   );

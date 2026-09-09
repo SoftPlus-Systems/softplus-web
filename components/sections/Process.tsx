@@ -32,8 +32,18 @@ export default function Process() {
         gsap.timeline({
           scrollTrigger: { trigger: el, start: "top 65%", end: "top 35%", scrub: 0.5 },
         })
-          .fromTo(el, { opacity: 0.25 }, { opacity: 1, ease: "none" })
-          .fromTo(marker, { scale: 0.6, backgroundColor: "rgba(21,23,27,1)" }, { scale: 1, backgroundColor: "#c6ff5e", ease: "none" }, 0);
+          .fromTo(el, { opacity: 0.35 }, { opacity: 1, ease: "none" })
+          .fromTo(
+            marker,
+            { scale: 0.75, backgroundColor: "rgba(21,23,27,1)", borderColor: "rgba(198,255,94,0.25)" },
+            {
+              scale: 1,
+              backgroundColor: "rgba(198,255,94,0.14)",
+              borderColor: "rgba(198,255,94,0.7)",
+              ease: "none",
+            },
+            0
+          );
       });
     }, rootRef);
 
@@ -41,7 +51,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="process" ref={rootRef} className="relative bg-ink-950 py-32 lg:py-44">
+    <section id="process" ref={rootRef} className="relative bg-ink-950 py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="How we work"
@@ -55,7 +65,7 @@ export default function Process() {
           description="A deliberate process built to remove risk at every stage — you always know exactly what's being built and why."
         />
 
-        <div data-process-track className="relative mx-auto mt-24 max-w-3xl">
+        <div data-process-track className="relative mx-auto mt-20 max-w-3xl">
           {/* Line sits at pl-2 + half the marker's own width, so it runs
               through the marker's true center rather than its edge. */}
           <div className="absolute left-6 top-0 h-full w-px bg-surface-line sm:left-7" />
@@ -64,14 +74,14 @@ export default function Process() {
             className="absolute left-6 top-0 h-full w-px bg-signal shadow-glow-sm sm:left-7"
           />
 
-          <div className="flex flex-col gap-16 lg:gap-20">
+          <div className="flex flex-col gap-14 lg:gap-16">
             {process.map((stage) => (
               <div data-stage key={stage.index} className="relative flex gap-8 pl-2 sm:gap-10">
                 <div
                   data-stage-marker
-                  className="relative z-10 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/60 bg-surface font-mono text-[11px] text-ink-950 sm:h-10 sm:w-10"
+                  className="relative z-10 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/25 bg-surface font-mono text-[11px] sm:h-10 sm:w-10"
                 >
-                  <span className="mix-blend-difference text-bone">{stage.index}</span>
+                  <span className="text-signal">{stage.index}</span>
                 </div>
                 <div>
                   <h3 className="font-display text-2xl font-medium text-bone sm:text-3xl">{stage.title}</h3>

@@ -7,7 +7,7 @@ import ProjectMockup from "./ProjectMockup";
 
 export default function CaseStudies() {
   return (
-    <section id="work" className="relative bg-ink-950 py-32 lg:py-44">
+    <section id="work" className="relative bg-ink-950 py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="Selected work"
@@ -22,14 +22,16 @@ export default function CaseStudies() {
         />
       </div>
 
-      <div className="mt-24 flex flex-col gap-28 lg:gap-36">
+      <div className="mt-20 flex flex-col gap-20 lg:gap-28">
         {caseStudies.map((project, i) => (
           <motion.div
             key={project.index}
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: "-15%" }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            // once: false meant every project re-animated each time it came
+            // back into view, which made scrolling back up feel unsettled.
+            viewport={{ once: true, margin: "-12%" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto max-w-[1400px] px-6 lg:px-10"
           >
             <div
@@ -39,7 +41,7 @@ export default function CaseStudies() {
             >
               <div
                 data-cursor="view"
-                className="group aspect-[4/3] w-full origin-center transition-transform duration-700 ease-cinematic hover:scale-[1.02]"
+                className="group aspect-[4/3] w-full origin-center transition-transform duration-500 ease-cinematic hover:scale-[1.01]"
               >
                 <ProjectMockup index={i} type={project.type} />
               </div>
