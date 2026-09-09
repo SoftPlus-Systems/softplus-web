@@ -32,13 +32,15 @@ export default function Process() {
         gsap.timeline({
           scrollTrigger: { trigger: el, start: "top 65%", end: "top 35%", scrub: 0.5 },
         })
-          .fromTo(el, { opacity: 0.35 }, { opacity: 1, ease: "none" })
+          .fromTo(el, { opacity: 0.45 }, { opacity: 1, ease: "none" })
           .fromTo(
             marker,
             { scale: 0.75, backgroundColor: "rgba(21,23,27,1)", borderColor: "rgba(198,255,94,0.25)" },
             {
               scale: 1,
-              backgroundColor: "rgba(198,255,94,0.14)",
+              // Opaque: a translucent fill lets the progress line show
+              // straight through the middle of the marker.
+              backgroundColor: "rgb(46,56,36)",
               borderColor: "rgba(198,255,94,0.7)",
               ease: "none",
             },
@@ -51,7 +53,7 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="process" ref={rootRef} className="relative bg-ink-950 py-24 lg:py-32">
+    <section id="process" ref={rootRef} className="relative bg-ink-950 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="How we work"
@@ -65,7 +67,7 @@ export default function Process() {
           description="A deliberate process built to remove risk at every stage — you always know exactly what's being built and why."
         />
 
-        <div data-process-track className="relative mx-auto mt-20 max-w-3xl">
+        <div data-process-track className="relative mx-auto mt-12 max-w-3xl sm:mt-20">
           {/* Line sits at pl-2 + half the marker's own width, so it runs
               through the marker's true center rather than its edge. */}
           <div className="absolute left-6 top-0 h-full w-px bg-surface-line sm:left-7" />
@@ -74,7 +76,7 @@ export default function Process() {
             className="absolute left-6 top-0 h-full w-px bg-signal shadow-glow-sm sm:left-7"
           />
 
-          <div className="flex flex-col gap-14 lg:gap-16">
+          <div className="flex flex-col gap-12 sm:gap-14 lg:gap-16">
             {process.map((stage) => (
               <div data-stage key={stage.index} className="relative flex gap-8 pl-2 sm:gap-10">
                 <div

@@ -4,10 +4,12 @@ import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 import MagneticButton from "@/components/MagneticButton";
 import ParticleField from "./ParticleField";
+import { useLiteDevice } from "@/lib/capability";
 import { contact, footerNav } from "@/lib/data";
 
 export default function FinalCTA() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const lite = useLiteDevice();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -28,8 +30,9 @@ export default function FinalCTA() {
   }, []);
 
   return (
-    <section id="contact" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-28 lg:py-40">
-      <ParticleField />
+    <section id="contact" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-20 sm:py-28 lg:py-40">
+      {/* Decoration only — the gradient below carries the section without it. */}
+      {!lite && <ParticleField />}
       <div
         className="pointer-events-none absolute inset-0"
         style={{

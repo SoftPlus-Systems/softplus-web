@@ -73,7 +73,7 @@ function TechMarquee({ items, duration, reverse = false }: { items: string[]; du
 
 export default function Technology() {
   return (
-    <section id="stack" className="relative overflow-hidden bg-ink-950 py-24 lg:py-32">
+    <section id="stack" className="relative overflow-hidden bg-ink-950 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="Technology"
@@ -95,7 +95,7 @@ export default function Technology() {
         <Orbit items={ring2} radius={210} duration={40} reverse />
       </div>
 
-      <div className="mt-16 flex flex-col gap-4 md:hidden">
+      <div className="mt-10 flex flex-col gap-4 md:hidden">
         <TechMarquee items={ring1} duration={18} />
         <TechMarquee items={ring2} duration={22} reverse />
       </div>

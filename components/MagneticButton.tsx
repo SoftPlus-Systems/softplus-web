@@ -37,7 +37,9 @@ export default function MagneticButton({ children, href, onClick, variant = "pri
 
   if (href) {
     return (
-      <a ref={ref} href={href} data-cursor="link" className={clsx(base, styles, className)}>
+      // onClick matters on the link form too — the mobile menu uses it to close
+      // itself when the in-page CTA is tapped.
+      <a ref={ref} href={href} onClick={onClick} data-cursor="link" className={clsx(base, styles, className)}>
         {content}
       </a>
     );

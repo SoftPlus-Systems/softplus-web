@@ -14,16 +14,18 @@ const display = Bricolage_Grotesque({
   display: "swap",
 });
 
+// Only the weights the site actually sets. 600 was loaded for nothing — the
+// one `font-semibold` on the page is on the display family, which is variable.
 const sans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   variable: "--font-sans",
   display: "swap",
 });
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   variable: "--font-mono",
   display: "swap",
 });

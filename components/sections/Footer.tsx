@@ -3,11 +3,15 @@ import { contact, footerNav } from "@/lib/data";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-surface-line bg-ink-950 pt-20">
+    <footer className="relative overflow-hidden border-t border-surface-line bg-ink-950 pt-16 sm:pt-20">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
-        <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <a href="#top" className="text-bone">
+            <a
+              href="#top"
+              aria-label="Soft Plus Systems — back to top"
+              className="inline-flex items-center py-1 text-bone"
+            >
               <Wordmark className="h-11" />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-mist">
@@ -18,13 +22,13 @@ export default function Footer() {
 
           <div>
             <h4 className="font-mono text-xs uppercase tracking-wide-2 text-signal">Solutions</h4>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-3 flex flex-col">
               {footerNav.solutions.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
                     data-cursor="link"
-                    className="text-sm text-mist transition-colors duration-300 hover:text-bone"
+                    className="block py-3 text-sm text-mist transition-colors duration-300 hover:text-bone"
                   >
                     {item.label}
                   </a>
@@ -35,13 +39,13 @@ export default function Footer() {
 
           <div>
             <h4 className="font-mono text-xs uppercase tracking-wide-2 text-signal">Company</h4>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-3 flex flex-col">
               {footerNav.company.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
                     data-cursor="link"
-                    className="text-sm text-mist transition-colors duration-300 hover:text-bone"
+                    className="block py-3 text-sm text-mist transition-colors duration-300 hover:text-bone"
                   >
                     {item.label}
                   </a>
@@ -52,7 +56,7 @@ export default function Footer() {
 
           <div>
             <h4 className="font-mono text-xs uppercase tracking-wide-2 text-signal">Connect</h4>
-            <ul className="mt-5 flex flex-col gap-3">
+            <ul className="mt-3 flex flex-col">
               {footerNav.social.map((item) => (
                 <li key={item.label}>
                   <a
@@ -60,7 +64,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-cursor="link"
-                    className="text-sm text-mist transition-colors duration-300 hover:text-bone"
+                    className="block py-3 text-sm text-mist transition-colors duration-300 hover:text-bone"
                   >
                     {item.label}
                   </a>
@@ -70,7 +74,7 @@ export default function Footer() {
             <a
               href={`mailto:${contact.email}`}
               data-cursor="link"
-              className="mt-6 inline-block text-sm text-mist transition-colors duration-300 hover:text-bone"
+              className="mt-3 inline-block py-3 text-sm text-mist transition-colors duration-300 hover:text-bone"
             >
               Email us
             </a>

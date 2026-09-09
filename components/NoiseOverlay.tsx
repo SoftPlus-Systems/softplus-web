@@ -1,4 +1,14 @@
+"use client";
+
+import { useLiteDevice } from "@/lib/capability";
+
 export default function NoiseOverlay() {
+  // A full-viewport SVG turbulence filter composited with `mix-blend-overlay`
+  // makes every scroll frame a blend of the whole page. It is worth about 2%
+  // opacity of texture, which is not worth that on a mid-range phone.
+  const lite = useLiteDevice();
+  if (lite) return null;
+
   return (
     <svg
       className="pointer-events-none fixed inset-0 z-[90] h-full w-full opacity-[0.022] mix-blend-overlay"

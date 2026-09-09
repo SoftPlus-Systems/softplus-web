@@ -7,7 +7,7 @@ import ProjectMockup from "./ProjectMockup";
 
 export default function CaseStudies() {
   return (
-    <section id="work" className="relative bg-ink-950 py-24 lg:py-32">
+    <section id="work" className="relative bg-ink-950 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="Selected work"
@@ -22,7 +22,7 @@ export default function CaseStudies() {
         />
       </div>
 
-      <div className="mt-20 flex flex-col gap-20 lg:gap-28">
+      <div className="mt-12 flex flex-col gap-16 sm:mt-20 sm:gap-20 lg:gap-28">
         {caseStudies.map((project, i) => (
           <motion.div
             key={project.index}
@@ -67,11 +67,19 @@ export default function CaseStudies() {
                   ))}
                 </div>
 
-                <div className="mt-10 grid grid-cols-3 gap-6 border-t border-surface-line pt-8">
+                {/* Several results are words, not figures ("Multi-entity",
+                    "Windows + Mobile"), which no three-column grid holds at
+                    phone width. They read as a spec list there instead. */}
+                <div className="mt-8 grid gap-3 border-t border-surface-line pt-6 sm:mt-10 sm:grid-cols-3 sm:gap-6 sm:pt-8">
                   {project.results.map((r) => (
-                    <div key={r.label}>
-                      <div className="font-display text-2xl font-medium text-signal sm:text-3xl">{r.value}</div>
-                      <div className="mt-1 text-xs text-mist">{r.label}</div>
+                    <div
+                      key={r.label}
+                      className="flex items-baseline justify-between gap-4 border-b border-surface-line pb-3 last:border-0 last:pb-0 sm:block sm:border-0 sm:pb-0"
+                    >
+                      <div className="font-display text-xl font-medium text-signal sm:text-2xl lg:text-3xl">
+                        {r.value}
+                      </div>
+                      <div className="text-xs text-mist sm:mt-1">{r.label}</div>
                     </div>
                   ))}
                 </div>

@@ -107,7 +107,8 @@ function MobileCarousel() {
             aria-label={`Show ${service.name}`}
             onClick={() => goTo(i)}
             data-cursor="link"
-            className="p-1.5"
+            // The dot is 6px tall; the button around it is what gets tapped.
+            className="flex h-11 w-8 items-center justify-center"
           >
             <span
               className="block h-1.5 rounded-full transition-all duration-300"
@@ -205,7 +206,7 @@ function DesktopExplorer() {
 
 export default function Services() {
   return (
-    <section id="services" className="relative bg-ink-950 py-24 lg:py-32">
+    <section id="services" className="relative bg-ink-950 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="Solutions"
@@ -220,7 +221,7 @@ export default function Services() {
         />
       </div>
 
-      <div className="mt-16">
+      <div className="mt-10 sm:mt-16">
         <MobileCarousel />
         <div className="mx-auto hidden max-w-[1400px] px-6 lg:block lg:px-10">
           <DesktopExplorer />
