@@ -45,7 +45,6 @@ export default function Process() {
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10">
         <SectionHeading
           eyebrow="How we work"
-          align="center"
           title={
             <>
               From idea to
@@ -56,24 +55,28 @@ export default function Process() {
           description="A deliberate process built to remove risk at every stage — you always know exactly what's being built and why."
         />
 
-        <div data-process-track className="relative mx-auto mt-24 max-w-xl">
-          <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-surface-line" />
+        <div data-process-track className="relative mx-auto mt-24 max-w-3xl">
+          {/* Line sits at pl-2 + half the marker's own width, so it runs
+              through the marker's true center rather than its edge. */}
+          <div className="absolute left-6 top-0 h-full w-px bg-surface-line sm:left-7" />
           <div
             ref={lineRef}
-            className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-signal shadow-glow-sm"
+            className="absolute left-6 top-0 h-full w-px bg-signal shadow-glow-sm sm:left-7"
           />
 
-          <div className="flex flex-col gap-16 sm:gap-20">
+          <div className="flex flex-col gap-16 lg:gap-20">
             {process.map((stage) => (
-              <div data-stage key={stage.index} className="relative flex flex-col items-center text-center">
+              <div data-stage key={stage.index} className="relative flex gap-8 pl-2 sm:gap-10">
                 <div
                   data-stage-marker
-                  className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-signal/60 bg-surface font-mono text-[11px] text-ink-950"
+                  className="relative z-10 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/60 bg-surface font-mono text-[11px] text-ink-950 sm:h-10 sm:w-10"
                 >
                   <span className="mix-blend-difference text-bone">{stage.index}</span>
                 </div>
-                <h3 className="mt-6 font-display text-2xl font-medium text-bone sm:text-3xl">{stage.title}</h3>
-                <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-mist">{stage.description}</p>
+                <div>
+                  <h3 className="font-display text-2xl font-medium text-bone sm:text-3xl">{stage.title}</h3>
+                  <p className="mt-3 max-w-md text-[15px] leading-relaxed text-mist">{stage.description}</p>
+                </div>
               </div>
             ))}
           </div>
