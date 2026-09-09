@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLiteDevice } from "@/lib/capability";
 import { Wordmark } from "./PlusLogo";
 import { contact, nav } from "@/lib/data";
 import MagneticButton from "./MagneticButton";
@@ -9,6 +10,7 @@ import MagneticButton from "./MagneticButton";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const lite = useLiteDevice();
 
   useEffect(() => {
     function onScroll() {
@@ -32,10 +34,20 @@ export default function Navbar() {
       >
         <div
           className={`mx-auto flex max-w-[1400px] items-center justify-between px-6 transition-all duration-500 ease-cinematic lg:px-10 ${
-            scrolled ? "rounded-full border border-surface-line bg-ink-950/80 py-2.5 backdrop-blur-xl mx-4 lg:mx-10" : ""
+            scrolled
+              ? `mx-4 rounded-full border border-surface-line py-2.5 lg:mx-10 ${
+                  lite ? "bg-ink-950/95" : "bg-ink-950/80 backdrop-blur-xl"
+                }`
+              : ""
           }`}
         >
-          <a href="#top" data-cursor="link" className="text-bone">
+          {/* The mark itself is 32px tall; the link around it is the target. */}
+          <a
+            href="#top"
+            data-cursor="link"
+            aria-label="Soft Plus Systems — back to top"
+            className="-ml-2 flex h-11 items-center px-2 text-bone"
+          >
             <Wordmark className="h-8 lg:h-9" />
           </a>
 
@@ -64,7 +76,7 @@ export default function Navbar() {
             data-cursor="link"
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="relative z-[60] flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden"
+            className="relative z-[60] -mr-1 flex h-11 w-11 flex-col items-center justify-center gap-[5px] lg:hidden"
           >
             <motion.span
               animate={open ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
@@ -103,11 +115,22 @@ export default function Navbar() {
                 </motion.a>
               ))}
             </nav>
-            <div className="flex flex-col gap-2 font-mono text-xs uppercase tracking-wide-2 text-mist sm:flex-row sm:items-center sm:justify-between">
-              <span>Soft+Systems</span>
-              <a href={`mailto:${contact.email}`} className="transition-colors duration-300 hover:text-bone">
-                Email us
-              </a>
+            {/* The desktop bar carries a "Start a project" button that was
+                hidden below lg, so the menu on the platform that matters most
+                had no call to action in it at all. */}
+            <div className="flex flex-col gap-6">
+              <MagneticButton href="#contact" onClick={() => setOpen(false)} className="w-full justify-center">
+                Start a project
+              </MagneticButton>
+              <div className="flex flex-col gap-1 font-mono text-xs uppercase tracking-wide-2 text-mist sm:flex-row sm:items-center sm:justify-between">
+                <span className="py-2">Soft+Systems</span>
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="py-2 transition-colors duration-300 hover:text-bone"
+                >
+                  Email us
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

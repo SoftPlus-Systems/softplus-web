@@ -8,7 +8,7 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(198, 255, 94, 0.4) transparent;
+  scrollbar-color: rgba(243, 244, 239, 0.18) transparent;
 }
 
 html {
@@ -31,7 +31,7 @@ body {
 }
 
 ::selection {
-  background: #c6ff5e;
+  background: rgba(198, 255, 94, 0.85);
   color: #07080a;
 }
 
@@ -42,9 +42,12 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(198, 255, 94, 0.35);
+  background: rgba(243, 244, 239, 0.16);
   border-radius: 999px;
   border: 2px solid #07080a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(243, 244, 239, 0.28);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -65,8 +68,23 @@ body {
   }
 }
 
+/* A percentage fade is only ~30px wide on a phone, which reads as a hard cut
+   rather than a fade. A fixed distance behaves the same at every width. */
 .mask-fade-x {
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 56px,
+    black calc(100% - 56px),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 56px,
+    black calc(100% - 56px),
+    transparent
+  );
 }
 
 @layer utilities {

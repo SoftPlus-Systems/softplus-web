@@ -56,8 +56,8 @@ const config: Config = {
         "grid-fine": "48px 48px",
       },
       boxShadow: {
-        glow: "0 0 60px -12px rgba(198,255,94,0.45)",
-        "glow-sm": "0 0 24px -6px rgba(198,255,94,0.5)",
+        glow: "0 0 48px -14px rgba(198,255,94,0.30)",
+        "glow-sm": "0 0 20px -8px rgba(198,255,94,0.35)",
       },
       animation: {
         marquee: "marquee 32s linear infinite",

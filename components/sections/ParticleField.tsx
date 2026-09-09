@@ -15,26 +15,30 @@ export default function ParticleField() {
 
     let width = 0;
     let height = 0;
-    let raf: number;
+    let raf = 0;
+    let running = false;
     let particles: { x: number; y: number; r: number; vy: number; o: number }[] = [];
 
     function resize() {
       const parent = canvas!.parentElement!;
       width = parent.clientWidth;
       height = parent.clientHeight;
-      canvas!.width = width * devicePixelRatio;
-      canvas!.height = height * devicePixelRatio;
+      // Retina phones would otherwise composite a 3x buffer for what is a
+      // handful of 1px dots; 1.5x is indistinguishable and much cheaper.
+      const scale = Math.min(window.devicePixelRatio || 1, 1.5);
+      canvas!.width = Math.round(width * scale);
+      canvas!.height = Math.round(height * scale);
       canvas!.style.width = `${width}px`;
       canvas!.style.height = `${height}px`;
-      ctx!.scale(devicePixelRatio, devicePixelRatio);
+      ctx!.setTransform(scale, 0, 0, scale, 0, 0);
 
-      const count = Math.floor((width * height) / 9000);
+      const count = Math.min(90, Math.floor((width * height) / 14000));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        r: Math.random() * 1.6 + 0.4,
-        vy: Math.random() * 0.25 + 0.05,
-        o: Math.random() * 0.5 + 0.2,
+        r: Math.random() * 1.4 + 0.4,
+        vy: Math.random() * 0.22 + 0.05,
+        o: Math.random() * 0.4 + 0.15,
       }));
     }
 
@@ -51,14 +55,42 @@ export default function ParticleField() {
       raf = requestAnimationFrame(draw);
     }
 
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
-    return () => {
+    function start() {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(draw);
+    }
+
+    function stop() {
+      if (!running) return;
+      running = false;
       cancelAnimationFrame(raf);
+    }
+
+    resize();
+
+    // This sits in the final CTA at the very bottom of the page — no reason to
+    // run a full-width animation loop for the whole scroll up to it.
+    const observer = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting && !document.hidden ? start() : stop()),
+      { rootMargin: "15% 0px" }
+    );
+    observer.observe(canvas);
+
+    function onVisibility() {
+      if (document.hidden) stop();
+    }
+
+    window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", onVisibility);
+
+    return () => {
+      stop();
+      observer.disconnect();
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />;
+  return <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 h-full w-full" />;
 }

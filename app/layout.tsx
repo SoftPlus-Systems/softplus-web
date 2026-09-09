@@ -14,16 +14,18 @@ const display = Bricolage_Grotesque({
   display: "swap",
 });
 
+// Only the weights the site actually sets. 600 was loaded for nothing — the
+// one `font-semibold` on the page is on the display family, which is variable.
 const sans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   variable: "--font-sans",
   display: "swap",
 });
 
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   variable: "--font-mono",
   display: "swap",
 });
@@ -43,6 +45,17 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable} preloading`}>
+      <head>
+        {/* The scroll lock and the intro overlay are both removed by the
+            preloader. With scripting off nothing would ever remove them, so
+            the page would render as an unscrollable black panel. */}
+        <noscript>
+          <style>{`
+            html.preloading, html.preloading body { overflow: auto !important; height: auto !important; }
+            [data-preloader] { display: none !important; }
+          `}</style>
+        </noscript>
+      </head>
       <body className="font-sans">
         <Preloader />
         <Cursor />

@@ -15,17 +15,17 @@ const palettes = [
 ];
 
 const screenshots: Record<MockupType, string> = {
-  erp: "/case-studies/stackbooks.png",
-  accounting: "/case-studies/easyaccounting.png",
-  stock: "/case-studies/dressdesk.png",
-  pos: "/case-studies/pos.png",
-  "mobile-medical": "/case-studies/spmedical.png",
-  "mobile-invoice": "/case-studies/invoicing.png",
-  "website-menu": "/case-studies/menus.png",
-  "website-feedback": "/case-studies/feedback.png",
+  erp: "/case-studies/stackbooks.webp",
+  accounting: "/case-studies/easyaccounting.webp",
+  stock: "/case-studies/dressdesk.webp",
+  pos: "/case-studies/pos.webp",
+  "mobile-medical": "/case-studies/spmedical.webp",
+  "mobile-invoice": "/case-studies/invoicing.webp",
+  "website-menu": "/case-studies/menus.webp",
+  "website-feedback": "/case-studies/feedback.webp",
 };
 
-const mobileShots = ["/case-studies/spmedicalmobile.png", "/case-studies/spmedicalmobilepatient.png"];
+const mobileShots = ["/case-studies/spmedicalmobile.webp", "/case-studies/spmedicalmobilepatient.webp"];
 
 function DesktopFrame({ src, color, bg, children }: { src: string; color: string; bg: string; children?: React.ReactNode }) {
   return (
@@ -43,9 +43,11 @@ function DesktopFrame({ src, color, bg, children }: { src: string; color: string
         <Image src={src} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-top" />
       </div>
       {children}
+      {/* A radial gradient reads the same as a blurred disc here but costs the
+          compositor nothing when the card is scaled on hover. */}
       <div
-        className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full blur-[70px]"
-        style={{ background: color, opacity: 0.25 }}
+        className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full"
+        style={{ background: `radial-gradient(circle, ${color}33, transparent 70%)` }}
       />
     </div>
   );
@@ -69,8 +71,8 @@ function PhoneFrame({ src, color }: { src: string; color: string }) {
   return (
     <div className="relative flex h-full w-full items-center justify-center">
       <div
-        className="pointer-events-none absolute h-56 w-56 rounded-full blur-[80px]"
-        style={{ background: color, opacity: 0.2 }}
+        className="pointer-events-none absolute h-56 w-56 rounded-full"
+        style={{ background: `radial-gradient(circle, ${color}2b, transparent 70%)` }}
       />
       <Phone src={src} width={190} />
     </div>

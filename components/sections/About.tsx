@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import GridBackdrop from "@/components/GridBackdrop";
+import { isLiteDevice } from "@/lib/capability";
 
 const paragraph =
   "Soft Plus Systems is a software studio that builds the operational core of real businesses. We don't chase trends — we build ERP, accounting, stock and POS systems that hold up under the weight of daily use, for teams who need software that simply works, every single day.";
@@ -18,32 +19,52 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const words = gsap.utils.toArray<HTMLElement>("[data-word]");
-      gsap.set(words, { opacity: 0.18 });
+      // The word-by-word reveal updates one opacity per word on every scroll
+      // tick — around fifty of them. That is fine on a desktop and is real work
+      // on a mid-range phone, where the paragraph also runs to ten lines and
+      // spends most of the scroll unreadable. There it fades in as one block.
+      if (isLiteDevice()) {
+        gsap.fromTo(
+          "[data-about-text]",
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+            scrollTrigger: { trigger: "[data-about-text]", start: "top 85%", once: true },
+          }
+        );
+      } else {
+        const words = gsap.utils.toArray<HTMLElement>("[data-word]");
+        gsap.set(words, { opacity: 0.3 });
 
-      gsap.to(words, {
-        opacity: 1,
-        stagger: 0.02,
-        ease: "none",
-        scrollTrigger: {
-          trigger: "[data-about-text]",
-          start: "top 75%",
-          end: "bottom 55%",
-          scrub: 0.4,
-        },
-      });
+        gsap.to(words, {
+          opacity: 1,
+          stagger: 0.02,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "[data-about-text]",
+            start: "top 75%",
+            end: "bottom 55%",
+            scrub: 0.4,
+          },
+        });
+      }
 
       gsap.utils.toArray<HTMLElement>("[data-belief]").forEach((el, i) => {
         gsap.fromTo(
           el,
-          { opacity: 0, y: 40 },
+          { opacity: 0, y: 24 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            delay: i * 0.08,
+            duration: 0.6,
+            delay: i * 0.06,
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none reverse" },
+            // Playing this in reverse on every scroll back up is work for no
+            // benefit; the reveal only needs to happen once.
+            scrollTrigger: { trigger: el, start: "top 90%", once: true },
           }
         );
       });
@@ -53,7 +74,7 @@ export default function About() {
   }, []);
 
   return (
-    <section id="about" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-32 lg:py-44">
+    <section id="about" ref={rootRef} className="relative overflow-hidden bg-ink-950 py-16 sm:py-24 lg:py-32">
       <GridBackdrop className="opacity-60" />
       <div className="relative mx-auto max-w-[1400px] px-6 lg:px-10">
         <div className="mb-6 flex items-center gap-3 font-mono text-xs uppercase tracking-wide-3 text-signal">
@@ -63,7 +84,7 @@ export default function About() {
 
         <p
           data-about-text
-          className="max-w-5xl font-display text-3xl font-medium leading-[1.25] tracking-tightest text-bone sm:text-4xl lg:text-5xl"
+          className="max-w-5xl font-display text-xl font-medium leading-[1.35] tracking-tightest text-bone sm:text-3xl sm:leading-[1.25] lg:text-4xl"
         >
           {paragraph.split(" ").map((word, i) => (
             <span key={i} data-word className="mr-[0.28em] inline-block">
@@ -72,7 +93,7 @@ export default function About() {
           ))}
         </p>
 
-        <div className="mt-24 grid gap-px overflow-hidden rounded-2xl border border-surface-line bg-surface-line sm:grid-cols-3">
+        <div className="mt-12 grid gap-px sm:mt-20 overflow-hidden rounded-2xl border border-surface-line bg-surface-line sm:grid-cols-3">
           {beliefs.map((b) => (
             <div data-belief key={b.n} className="bg-ink-950 p-8 lg:p-10">
               <span className="font-mono text-sm text-signal">{b.n}</span>

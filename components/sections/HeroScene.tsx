@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -27,7 +27,7 @@ function plusShape(arm = 0.22, thickness = 0.09) {
 function PlusField() {
   const group = useRef<THREE.Group>(null);
   const mesh = useRef<THREE.InstancedMesh>(null);
-  const count = 64;
+  const count = 40;
 
   const geometry = useMemo(() => {
     const shape = plusShape();
@@ -38,7 +38,7 @@ function PlusField() {
 
   const points = useMemo(() => {
     const pts: { pos: THREE.Vector3; scale: number; speed: number }[] = [];
-    const radius = 2.5;
+    const radius = 2.2;
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
     for (let i = 0; i < count; i++) {
       const y = 1 - (i / (count - 1)) * 2;
@@ -48,7 +48,7 @@ function PlusField() {
       const z = Math.sin(theta) * r;
       pts.push({
         pos: new THREE.Vector3(x, y, z).multiplyScalar(radius),
-        scale: 0.55 + Math.random() * 0.85,
+        scale: 0.45 + Math.random() * 0.6,
         speed: 0.3 + Math.random() * 0.7,
       });
     }
@@ -83,14 +83,14 @@ function PlusField() {
         <meshStandardMaterial
           color="#c6ff5e"
           emissive="#7fce34"
-          emissiveIntensity={0.9}
+          emissiveIntensity={0.5}
           roughness={0.35}
           metalness={0.1}
         />
       </instancedMesh>
       <mesh>
         <icosahedronGeometry args={[0.9, 1]} />
-        <meshBasicMaterial color="#c6ff5e" wireframe transparent opacity={0.18} />
+        <meshBasicMaterial color="#c6ff5e" wireframe transparent opacity={0.12} />
       </mesh>
     </group>
   );
@@ -107,17 +107,49 @@ function Rig() {
 }
 
 export default function HeroScene() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  // A WebGL render loop keeps burning frames while the hero is scrolled past
+  // or the tab is in the background, which is exactly when the rest of the
+  // page needs the main thread. Render only while the canvas is on screen.
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+
+    let onScreen = true;
+    const sync = () => setActive(onScreen && !document.hidden);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        sync();
+      },
+      { rootMargin: "10% 0px" }
+    );
+    observer.observe(el);
+    document.addEventListener("visibilitychange", sync);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, []);
+
   return (
-    <Canvas
-      dpr={[1, 1.75]}
-      camera={{ position: [0, 0, 7], fov: 42 }}
-      gl={{ antialias: true, alpha: true }}
-    >
-      <ambientLight intensity={0.4} />
-      <pointLight position={[5, 5, 5]} intensity={40} color="#c6ff5e" />
-      <pointLight position={[-6, -3, -4]} intensity={20} color="#4dd8ff" />
-      <PlusField />
-      <Rig />
-    </Canvas>
+    <div ref={wrapRef} className="h-full w-full">
+      <Canvas
+        frameloop={active ? "always" : "never"}
+        dpr={[1, 1.5]}
+        camera={{ position: [0, 0, 8.5], fov: 42 }}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      >
+        <ambientLight intensity={0.4} />
+        <pointLight position={[5, 5, 5]} intensity={40} color="#c6ff5e" />
+        <pointLight position={[-6, -3, -4]} intensity={20} color="#4dd8ff" />
+        <PlusField />
+        <Rig />
+      </Canvas>
+    </div>
   );
 }

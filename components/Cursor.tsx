@@ -7,6 +7,7 @@ export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
+  const [seen, setSeen] = useState(false);
   const [variant, setVariant] = useState<"default" | "link" | "view">("default");
 
   useEffect(() => {
@@ -24,6 +25,9 @@ export default function Cursor() {
     const dotY = gsap.quickTo(dotRef.current, "y", { duration: 0.12, ease: "power3.out" });
 
     function move(e: MouseEvent) {
+      // Until the pointer has actually moved there is no position to draw at,
+      // and the ring would otherwise sit parked in the top-left corner.
+      setSeen(true);
       ringX(e.clientX);
       ringY(e.clientY);
       dotX(e.clientX);
@@ -52,15 +56,15 @@ export default function Cursor() {
       <div
         ref={ringRef}
         className="pointer-events-none fixed left-0 top-0 z-[100] -translate-x-1/2 -translate-y-1/2 mix-blend-difference"
-        style={{ willChange: "transform" }}
+        style={{ willChange: "transform", opacity: seen ? 1 : 0 }}
       >
         <div
-          className={`flex items-center justify-center rounded-full border border-bone transition-all duration-300 ease-cinematic ${
+          className={`flex items-center justify-center rounded-full border border-bone transition-all duration-200 ease-cinematic ${
             variant === "link"
-              ? "h-14 w-14 border-signal bg-signal/10"
+              ? "h-11 w-11 border-signal bg-signal/10"
               : variant === "view"
-              ? "h-24 w-24 border-signal bg-signal/10"
-              : "h-8 w-8"
+              ? "h-16 w-16 border-signal bg-signal/10"
+              : "h-7 w-7"
           }`}
         >
           {variant === "view" && (
@@ -71,7 +75,7 @@ export default function Cursor() {
       <div
         ref={dotRef}
         className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal mix-blend-difference"
-        style={{ willChange: "transform" }}
+        style={{ willChange: "transform", opacity: seen ? 1 : 0 }}
       />
     </>
   );
