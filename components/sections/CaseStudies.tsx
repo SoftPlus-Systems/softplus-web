@@ -28,7 +28,7 @@ export default function CaseStudies() {
             key={project.index}
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-15%" }}
+            viewport={{ once: false, margin: "-15%" }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto max-w-[1400px] px-6 lg:px-10"
           >

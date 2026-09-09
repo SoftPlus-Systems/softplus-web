@@ -43,7 +43,7 @@ export default function About() {
             duration: 0.8,
             delay: i * 0.08,
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 88%" },
+            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none reverse" },
           }
         );
       });

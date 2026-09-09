@@ -23,7 +23,7 @@ function Bars({ color }: { color: string }) {
           key={i}
           initial={{ height: "10%" }}
           whileInView={{ height: `${h}%` }}
-          viewport={{ once: true, margin: "-10%" }}
+          viewport={{ once: false, margin: "-10%" }}
           transition={{ duration: 0.8, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
           className="flex-1 rounded-t-sm"
           style={{ background: i % 3 === 0 ? color : `${color}55` }}
@@ -113,7 +113,7 @@ function StockBody({ color }: { color: string }) {
             <motion.div
               initial={{ width: "0%" }}
               whileInView={{ width: `${level}%` }}
-              viewport={{ once: true, margin: "-10%" }}
+              viewport={{ once: false, margin: "-10%" }}
               transition={{ duration: 0.7, delay: i * 0.05 }}
               className="h-full rounded-full"
               style={{ background: level < 40 ? "#ff7a3d" : color }}
