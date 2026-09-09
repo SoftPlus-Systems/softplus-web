@@ -62,9 +62,15 @@ export default function Process() {
             className="absolute left-[15px] top-0 h-full w-px bg-signal shadow-glow-sm sm:left-[19px]"
           />
 
-          <div className="flex flex-col gap-16 lg:gap-20">
+          <div className="flex flex-col gap-12 sm:gap-16 lg:gap-20">
             {process.map((stage) => (
               <div data-stage key={stage.index} className="relative flex gap-8 pl-2 sm:gap-10">
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-0 top-1/2 -z-10 -translate-y-1/2 select-none font-display text-[4.5rem] font-semibold leading-none text-bone/[0.05] sm:text-[6rem] lg:text-[8rem]"
+                >
+                  {stage.index}
+                </span>
                 <div
                   data-stage-marker
                   className="relative z-10 mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/60 bg-surface font-mono text-[11px] text-ink-950 sm:h-10 sm:w-10"
