@@ -160,15 +160,15 @@ export const caseStudies: CaseStudy[] = [
   {
     index: "05",
     name: "SP Medical",
-    category: "Mobile App · Healthcare",
+    category: "Desktop & Mobile · Healthcare",
     description:
-      "A point-of-care mobile companion for a healthcare provider — patient lookup and full lab-result history, synced and on hand from a phone during a visit.",
+      "A patient records system for a healthcare provider that runs everywhere it's needed — a full Windows console at the desk, and a companion mobile app for patient lookup and lab history on the move.",
     results: [
-      { label: "Patients synced", value: "Offline-ready" },
+      { label: "Platforms", value: "Windows + Mobile" },
       { label: "Lab history", value: "Full history" },
       { label: "Lookup", value: "Instant search" },
     ],
-    tags: ["Mobile", "Healthcare", "Lab results"],
+    tags: ["Desktop", "Mobile", "Healthcare"],
     type: "mobile-medical",
   },
   {

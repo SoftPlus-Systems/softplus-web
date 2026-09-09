@@ -14,18 +14,20 @@ const palettes = [
   { a: "#4dd8ff", b: "#0f130a" },
 ];
 
-const screenshots: Record<MockupType, string[]> = {
-  erp: ["/case-studies/stackbooks.png"],
-  accounting: ["/case-studies/easyaccounting.png"],
-  stock: ["/case-studies/dressdesk.png"],
-  pos: ["/case-studies/pos.png"],
-  "mobile-medical": ["/case-studies/spmedicalmobile.png", "/case-studies/spmedicalmobilepatient.png"],
-  "mobile-invoice": ["/case-studies/invoicing.png"],
-  "website-menu": ["/case-studies/menus.png"],
-  "website-feedback": ["/case-studies/feedback.png"],
+const screenshots: Record<MockupType, string> = {
+  erp: "/case-studies/stackbooks.png",
+  accounting: "/case-studies/easyaccounting.png",
+  stock: "/case-studies/dressdesk.png",
+  pos: "/case-studies/pos.png",
+  "mobile-medical": "/case-studies/spmedical.png",
+  "mobile-invoice": "/case-studies/invoicing.png",
+  "website-menu": "/case-studies/menus.png",
+  "website-feedback": "/case-studies/feedback.png",
 };
 
-function DesktopFrame({ type, color, bg }: { type: MockupType; color: string; bg: string }) {
+const mobileShots = ["/case-studies/spmedicalmobile.png", "/case-studies/spmedicalmobilepatient.png"];
+
+function DesktopFrame({ src, color, bg, children }: { src: string; color: string; bg: string; children?: React.ReactNode }) {
   return (
     <div
       className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-surface-line"
@@ -38,14 +40,9 @@ function DesktopFrame({ type, color, bg }: { type: MockupType; color: string; bg
         <div className="ml-4 h-2.5 flex-1 max-w-[140px] rounded-full bg-bone/10" />
       </div>
       <div className="relative flex-1 overflow-hidden">
-        <Image
-          src={screenshots[type][0]}
-          alt=""
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover object-top"
-        />
+        <Image src={src} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-top" />
       </div>
+      {children}
       <div
         className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full blur-[70px]"
         style={{ background: color, opacity: 0.25 }}
@@ -57,47 +54,68 @@ function DesktopFrame({ type, color, bg }: { type: MockupType; color: string; bg
 function Phone({ src, width }: { src: string; width: number }) {
   return (
     <div
-      className="relative flex h-full max-h-[340px] flex-col overflow-hidden rounded-[2rem] border border-surface-line-strong bg-ink-950 shadow-2xl"
+      className="relative flex h-full max-h-[340px] flex-col overflow-hidden rounded-[1.75rem] border border-surface-line-strong bg-ink-950 shadow-2xl"
       style={{ width }}
     >
       <div className="relative flex-1 overflow-hidden">
         <Image src={src} alt="" fill sizes={`${width}px`} className="object-cover object-top" />
       </div>
-      <div className="mx-auto mb-2 h-1 w-16 rounded-full bg-bone/20" />
+      <div className="mx-auto mb-1.5 h-1 w-12 rounded-full bg-bone/20" />
     </div>
   );
 }
 
-function PhoneFrame({ type, color }: { type: MockupType; color: string }) {
-  const images = screenshots[type];
-  const width = images.length > 1 ? 150 : 190;
+function PhoneFrame({ src, color }: { src: string; color: string }) {
   return (
-    <div className="relative flex h-full w-full items-center justify-center gap-4">
+    <div className="relative flex h-full w-full items-center justify-center">
       <div
         className="pointer-events-none absolute h-56 w-56 rounded-full blur-[80px]"
         style={{ background: color, opacity: 0.2 }}
       />
-      {images.map((src) => (
-        <Phone key={src} src={src} width={width} />
-      ))}
+      <Phone src={src} width={190} />
     </div>
+  );
+}
+
+// SP Medical ships as both a Windows desktop console and a companion mobile
+// app, so its case study shows the desktop screen with the two real phone
+// screens fanned across the bottom-right corner rather than picking one.
+function CrossPlatformFrame({ color, bg }: { color: string; bg: string }) {
+  return (
+    <DesktopFrame src={screenshots["mobile-medical"]} color={color} bg={bg}>
+      <div className="pointer-events-none absolute bottom-3 right-3 flex items-end gap-2 sm:bottom-4 sm:right-4 sm:gap-2.5">
+        <div className="h-[92px] w-[46px] overflow-hidden rounded-[0.7rem] border border-surface-line-strong bg-ink-950 shadow-2xl sm:h-[124px] sm:w-[62px]">
+          <div className="relative h-full w-full">
+            <Image src={mobileShots[0]} alt="" fill sizes="62px" className="object-cover object-top" />
+          </div>
+        </div>
+        <div className="h-[104px] w-[52px] overflow-hidden rounded-[0.7rem] border border-surface-line-strong bg-ink-950 shadow-2xl sm:h-[140px] sm:w-[70px]">
+          <div className="relative h-full w-full">
+            <Image src={mobileShots[1]} alt="" fill sizes="70px" className="object-cover object-top" />
+          </div>
+        </div>
+      </div>
+    </DesktopFrame>
   );
 }
 
 export default function ProjectMockup({ index, type }: { index: number; type: MockupType }) {
   const p = palettes[index % palettes.length];
-  const isMobile = type === "mobile-medical" || type === "mobile-invoice";
 
-  if (isMobile) {
+  if (type === "mobile-medical") {
+    return <CrossPlatformFrame color={p.a} bg={p.b} />;
+  }
+
+  if (type === "mobile-invoice") {
     return (
       <div
         className="relative h-full w-full overflow-hidden rounded-2xl border border-surface-line"
         style={{ background: p.b }}
       >
-        <PhoneFrame type={type} color={p.a} />
+        <PhoneFrame src={screenshots[type]} color={p.a} />
       </div>
     );
   }
 
-  return <DesktopFrame type={type} color={p.a} bg={p.b} />;
+  return <DesktopFrame src={screenshots[type]} color={p.a} bg={p.b} />;
 }
