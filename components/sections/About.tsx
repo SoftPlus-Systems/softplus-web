@@ -10,7 +10,7 @@ const paragraph =
 
 const beliefs = [
   { n: "01", title: "Built for operators", body: "Every system we ship is judged by the person using it at 8am on a Monday, not by a demo." },
-  { n: "02", title: "Owned, not rented", body: "We build custom software you actually own — no vendor lock-in, no monthly hostage fees." },
+  { n: "02", title: "Your data, always yours", body: "Export everything, any time. A subscription buys a team that keeps improving your system — never a hold over your own operations." },
   { n: "03", title: "Engineered to last", body: "Architecture decisions are made for the system's tenth year of operation, not its first demo." },
 ];
 
