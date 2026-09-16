@@ -278,12 +278,6 @@ export const testimonials = [
   },
   {
     quote:
-      "As an accounting firm, we can't afford software that gets audit trails wrong. Soft Plus Systems built us something our own clients trust.",
-    name: "Srour Accounting Firm",
-    role: "CEO",
-  },
-  {
-    quote:
       "Our showroom runs on tight margins and tighter timing. Since launch, checkout is faster and inventory finally matches what's actually on the floor.",
     name: "Hobeika Frs",
     role: "Showroom Manager",
@@ -291,7 +285,7 @@ export const testimonials = [
 ];
 
 export const trustedBy = [
-  "SOMOPLAST", "SEASWEET", "SROUR ACCOUNTING FIRM", "HOBEIKA FRS",
+  "SOMOPLAST", "SEASWEET", "HOBEIKA FRS",
   "MAZAJ", "STARGATE", "HOLLYWOOD", "MR GRILL", "LA PLACE", "ABOU ZEID",
 ];
 
